@@ -10,6 +10,10 @@ class ProductsController < ApplicationController
   end
 
   def search
+    if params[:q].blank?
+      redirect_to products_path and return
+    end
+
     products = Product.where('LOWER(name) like ?', "%#{params[:q]}%")
     products += Category.where('LOWER(name) like ?', "%#{params[:q]}%").includes(:products).flat_map(&:products)
 

@@ -1,4 +1,16 @@
-<div> <% @orders.each do |order| %> </div>
-      <div> <%= order.created_at %> </div>
-      <div> <%= link_to( 'Destroy Order', orders_path( id: order.id ), method: :delete )%> </div>
-<div> <% end %> </div>
+<ul>
+  <% @orders.each do |order| %>
+      <strong><%= order.cancelled ? 'Order Canceled' : '' %></strong>
+      <li>
+        Order on - <%= order.created_at.in_time_zone('Chennai') %> | Total Price: <%= order.total_price %>
+      </li>
+      <li>
+        <% order.ordered_products.each do |ordered_product| %>
+            <%= link_to ordered_product.product.name, product_path(id: ordered_product.product_id) %> - <%= ordered_product.price %>
+        <% end %>
+      </li>
+      <li>
+        <%= link_to( 'Cancer order', order_path(id: order.id), method: :delete )%>
+      </li>
+  <% end %>
+</ul>

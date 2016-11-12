@@ -12,5 +12,10 @@
       </div>
   <% end %>
 
-  <div id="check-out-button"> <%= link_to( 'Checkout', orders_path( cart_product_ids: @cart_products.map(&:id), order_params: { billing_address: 'NA', delivery_address: 'NA' } ), method: :post) %>  </div>
+  <% if @cart_products.present? %>
+      <div id="check-out-button"> <%= link_to( 'Checkout', orders_path( cart_product_ids: @cart_products.map(&:id), order_params: { billing_address: 'NA', delivery_address: 'NA' } ), method: :post) %>  </div>
+  <% else %>
+      No Products in cart, please search for products
+      <%= link_to 'here', products_path %>
+  <% end %>
 </div>

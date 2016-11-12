@@ -8,31 +8,41 @@ class CartProductsController < ApplicationController
   end
 
   def create
-    @cart_product = CartProduct.create!(product_id: @product.id, user_id: current_user.id, quantity: 1)
+    cart_product = current_user.cart_products.detect{|cart_product| cart_product.product_id == @product.id}
+    if cart_product.present?
+      response_hash =  @cart_product.update_product_quantity( params[:quantity] )
+      if response_hash[:status]
+        flash[:success] = 'Product already added to card and the quantity is updated'
+      else
+        response_hash[:message]
+      end
+    else
+      @cart_product = CartProduct.create!(product_id: @product.id, user_id: current_user.id, quantity: 1)
+    end
 
-    render json: { status: false, message: "Product successfully added to cart"  }
-
+    flash[:success] = 'Product successfully added to cart'
+    redirect_to cart_products_path
   rescue => ex
-    render json: { status: false, message: "Error while creating cart #{ex.message}"  }
+    flash[:success] = "Error while creating cart #{ex.message}"
+    redirect_to cart_products_path
   end
 
-  # todo change this ajax call
   def update
     response_hash =  @cart_product.update_product_quantity( params[:quantity] )
-    render json: response_hash
 
+    render json: response_hash
   rescue => ex
     render json: { status: false, message: "Error while updating cart #{ex.message}" }
   end
 
-  # todo change this to ajax call
   def destroy
     @cart_product.destroy!
 
-    redirect_to products_path
+    redirect_to cart_products_path
   rescue => ex
     flash[:error] = ex.message
-    redirect_to products_path
+
+    redirect_to cart_products_path
   end
 
   private

@@ -8,7 +8,7 @@ class CartProduct < ActiveRecord::Base
     response_hash = { status: true, message: 'Product has been updated successfully' }
     product = self.product
 
-    requested_quantity = cart_product.quantity + quantity
+    requested_quantity = self.quantity + quantity
 
     if requested_quantity > product.available_quantity
       response_hash = { status: false, message: 'Product ran out of stock' }
@@ -21,7 +21,7 @@ class CartProduct < ActiveRecord::Base
     end
 
     available_quantity = ( product.available_quantity - quantity )
-    product.update( available_quantity: available_quantity )
+    product.update_attributes!( available_quantity: available_quantity )
 
     response_hash
   end

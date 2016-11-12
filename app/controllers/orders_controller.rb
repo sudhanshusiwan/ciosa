@@ -2,36 +2,41 @@ class OrdersController < ApplicationController
   before_action :set_product, only: [:create, :edit, :update]
 
   def index
-    @orders = current_user.orders
+    @orders = current_user.orders.includes(ordered_products: :product)
   end
 
   def create
     cart_product_ids = params[:cart_product_ids]
     order_params = params[:order_params]
 
-    Order.create_order_and_ordered_products(cart_product_ids, order_params, current_user)
+    order_id = Order.create_order_and_ordered_products(cart_product_ids, order_params, current_user)
 
-    redirect_to( products_path, success: 'Order has been placed successfully') and return
+    if order_id.nil?
+      flash[:notice] = 'Something went wrong, Please try again later'
+      redirect_to orders_path
+    else
+      flash[:notice] = 'Order has been placed successfully'
+      redirect_to order_path(id: order_id)
+    end
   rescue Exception => ex
-    puts ex.message
-    puts ex.backtrace
     flash[:error] = ex.message
 
-    redirect_to( products_path, success: 'Error occured while placing order')
+    redirect_to orders_path
   end
 
   def show
-
+    @order = Order.where(id: params[:id]).first
   end
 
   def destroy
-    @order.destroy!
-    redirect_to( products_path, success: 'Order has been cancelled successfully') and return
+    @order.update_attributes!(cancelled: true)
 
+    redirect_to orders_path
   rescue => ex
-    redirect_to( products_path, error: 'Error while cancelling the order, please try again after some' )
-  end
+    flash[:error] = ex.message
 
+    redirect_to orders_path
+  end
 
   private
   def set_product

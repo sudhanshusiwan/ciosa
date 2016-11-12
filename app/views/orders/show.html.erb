@@ -1,0 +1,5 @@
+Total Price: <%= @order.total_price %>
+
+<% @order.ordered_products.includes(:product).each do |ordered_product| %>
+    <%= link_to ordered_product.product.name, product_path(id: ordered_product.product_id) %> - <%= ordered_product.price %>
+<% end %>
