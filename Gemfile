@@ -33,6 +33,9 @@ gem 'puma'
 gem 'paperclip'
 gem 'after_party'
 
+gem 'paperclip'
+gem 'after_party'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
