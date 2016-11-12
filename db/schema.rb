@@ -16,6 +16,46 @@ ActiveRecord::Schema.define(version: 20161112134813) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "product_id",                   null: false
+    t.integer  "user_id",                      null: false
+    t.integer  "price",                        null: false
+    t.boolean  "is_completed", default: false, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "product_categories", force: :cascade do |t|
+    t.integer  "product_id",  null: false
+    t.integer  "category_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "product_categories", ["product_id", "category_id"], name: "product_category_index", unique: true, using: :btree
+
+  create_table "products", force: :cascade do |t|
+    t.string   "name",                             null: false
+    t.text     "description",                      null: false
+    t.integer  "price",                            null: false
+    t.string   "approval_status",    default: "f", null: false
+    t.integer  "creator_id",                       null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "name",                   default: "", null: false
     t.string   "email",                  default: "", null: false
