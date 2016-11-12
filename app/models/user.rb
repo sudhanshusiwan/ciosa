@@ -14,14 +14,6 @@ class User < ActiveRecord::Base
   USER_TYPE_SELLER = 'seller'
   USER_TYPE_ADMIN = 'admin'
 
-  def self.current=(user)
-    Thread.current['user'] = user
-  end
-
-  def self.current
-    Thread.current['user']
-  end
-
   private
 
   def update_user_type
