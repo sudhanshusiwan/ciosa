@@ -1,24 +1,97 @@
 <div>
+<table class="highlight responsive-table">
+        <thead>
+          <tr>
+              <th data-field="product">Product</th>
+              <th data-field="descr">Description</th>
+              <th data-field="quantity">Quantity</th>
+              <th data-field="price">Unit Price</th>
+              <th data-field="price">Total Price</th>
+          </tr>
+        </thead>
+<tbody>
   <% @cart_products.each do |cart_product| %>
+   <tr>
       <% product = cart_product.product %>
-      <div>
-        Cart Product id: <%= cart_product.id %>
-      </div>
-      <div>
+      <td>
         <%= product.name %>
-      </div>
-      <div>
+      </td>
+      <td>
         <%= product.description %>
-      </div>
-      <div>
-        <%= cart_product.quantity %>
-      </div>
+      </td>
+      <td>
+        <select style="display: block!important;width:75px;">
+		<% if cart_product.quantity == 1 %>
+		  <option value="1" selected="yes">1</option>
+		<% else %>
+		  <option value="1">1</option>
+		  <% end %>
+		<% if cart_product.quantity == 2 %>
+		  <option value="2" selected="yes">2</option>
+		<% else %>
+		  <option value="2">2</option>
+		  <% end %>
+		<% if cart_product.quantity == 3 %>
+		  <option value="3" selected="yes">3</option>
+		<% else %>
+		  <option value="3">3</option>
+		  <% end %>
+		<% if cart_product.quantity == 4 %>
+		  <option value="4" selected="yes">4</option>
+		<% else %>
+		  <option value="4">4</option>
+		  <% end %>
+		<% if cart_product.quantity == 5 %>
+		  <option value="5" selected="yes">5</option>
+		<% else %>
+		  <option value="5">5</option>
+		  <% end %>
+		<% if cart_product.quantity == 6 %>
+		  <option value="6" selected="yes">6</option>
+		<% else %>
+		  <option value="7">7</option>
+		  <% end %>
+		<% if cart_product.quantity == 8 %>
+		  <option value="8" selected="yes">8</option>
+		<% else %>
+		  <option value="8">8</option>
+		  <% end %>
+		<% if cart_product.quantity == 9 %>
+		  <option value="9" selected="yes">9</option>
+		<% else %>
+		  <option value="9">9</option>
+		  <% end %>
+	</select>
+      </td>
+      <td>
+        <%= product.price %>
+      </td>
+      <td>
+        <%= cart_product.quantity * product.price %>
+      </td>
+      <td>
+        <i class="small material-icons">delete</i>
+      </td>
+     </tr>
   <% end %>
-
+  <tr>
+   <td colspan="3" ></td>
+   <td style="font-weight:bold;border-top:1px solid">Total</td>
+   <td style="font-weight:bold;border-top:1px solid"></td>
+</tr>
+<tr>
   <% if @cart_products.present? %>
-      <div id="check-out-button"> <%= link_to( 'Checkout', orders_path( cart_product_ids: @cart_products.map(&:id), order_params: { billing_address: 'NA', delivery_address: 'NA' } ), method: :post) %>  </div>
+      <td colspan="6" id="check-out-button" class="container row"> <%= link_to( 'Checkout', orders_path( cart_product_ids: @cart_products.map(&:id), order_params: { billing_address: 'NA', delivery_address: 'NA' } ), method: :post, class: "btn right", style: "margin-left:7px;") %> 
+	<%= link_to 'Continue Shopping', href="/", class: "btn right" =%>
+      </td>
   <% else %>
+      <td colspan="6" id="check-out-button" class="container row">
       No Products in cart, please search for products
       <%= link_to 'here', products_path %>
+      </td>
   <% end %>
+</tr>
+
+</tbody>
+</table>
 </div>
