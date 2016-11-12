@@ -33,6 +33,28 @@ ActiveRecord::Schema.define(version: 20161112145823) do
     t.datetime "updated_at"
   end
 
+  create_table "organizations", force: :cascade do |t|
+    t.string  "name",              default: "", null: false
+    t.string  "address"
+    t.integer "creator_id",                     null: false
+    t.string  "email",             default: "", null: false
+    t.string  "mobile",            default: "", null: false
+    t.string  "organization_type", default: "", null: false
+    t.string  "pan_tin_number",    default: "", null: false
+    t.boolean "is_store",                       null: false
+    t.boolean "is_eco_friendly",                null: false
+    t.boolean "can_do_logistics",               null: false
+    t.text    "products_sold",                               array: true
+  end
+
+  add_index "organizations", ["can_do_logistics"], name: "index_organizations_on_can_do_logistics", using: :btree
+  add_index "organizations", ["creator_id"], name: "index_organizations_on_creator_id", using: :btree
+  add_index "organizations", ["email"], name: "index_organizations_on_email", unique: true, using: :btree
+  add_index "organizations", ["is_eco_friendly"], name: "index_organizations_on_is_eco_friendly", using: :btree
+  add_index "organizations", ["is_store"], name: "index_organizations_on_is_store", using: :btree
+  add_index "organizations", ["mobile"], name: "index_organizations_on_mobile", unique: true, using: :btree
+  add_index "organizations", ["organization_type"], name: "index_organizations_on_organization_type", using: :btree
+
   create_table "product_categories", force: :cascade do |t|
     t.integer  "product_id",  null: false
     t.integer  "category_id", null: false
@@ -55,28 +77,6 @@ ActiveRecord::Schema.define(version: 20161112145823) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "organizations", force: :cascade do |t|
-    t.string  "name",              default: "", null: false
-    t.string  "address"
-    t.integer "creator_id",                     null: false
-    t.string  "email",             default: "", null: false
-    t.string  "mobile",            default: "", null: false
-    t.string  "organization_type", default: "", null: false
-    t.string  "pan_tin_number",    default: "", null: false
-    t.boolean "is_store",                       null: false
-    t.boolean "is_eco_friendly",                null: false
-    t.boolean "can_do_logistics",               null: false
-    t.text    "products_sold",                               array: true
-  end
-
-  add_index "organizations", ["can_do_logistics"], name: "index_organizations_on_can_do_logistics", using: :btree
-  add_index "organizations", ["creator_id"], name: "index_organizations_on_creator_id", using: :btree
-  add_index "organizations", ["email"], name: "index_organizations_on_email", unique: true, using: :btree
-  add_index "organizations", ["is_eco_friendly"], name: "index_organizations_on_is_eco_friendly", using: :btree
-  add_index "organizations", ["is_store"], name: "index_organizations_on_is_store", using: :btree
-  add_index "organizations", ["mobile"], name: "index_organizations_on_mobile", unique: true, using: :btree
-  add_index "organizations", ["organization_type"], name: "index_organizations_on_organization_type", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name",                   default: "", null: false

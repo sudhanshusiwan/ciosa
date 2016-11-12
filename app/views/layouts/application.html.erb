@@ -8,6 +8,8 @@
 </head>
 <body>
 
+<%= render "shared/header" %>
+
 <p class="navbar-text pull-right">
 <% if user_signed_in? %>
   Logged in as <strong><%= current_user.email %></strong>.
@@ -26,6 +28,6 @@
 <% end %>
 
 <%= yield %>
-
+  <%= render "shared/footer" %>
 </body>
 </html>
