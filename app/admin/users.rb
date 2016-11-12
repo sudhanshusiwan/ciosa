@@ -25,7 +25,7 @@ ActiveAdmin.register User do
   end
 
   action_item( :decline, only: :show ) do
-    if resource.approved? || ( resource.is_seller? && resource.un_approved? )
+    if resource.approved? || ( resource.is_seller? && resource.approved? )
       link_to 'Decline', decline_admin_user_path
     end
   end

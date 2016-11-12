@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
   devise_for :users, controllers: { registrations: 'users/registrations' }
-  ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   root 'products#index'
