@@ -19,8 +19,8 @@ class User < ActiveRecord::Base
   has_many :orders
 
   scope :all_users, -> { all }
-  scope :approved_users, -> { where( is_approved: true ) }
-  scope :unapproved_users, -> { where( is_approved: false ) }
+  scope :approved, -> { where( is_approved: true ) }
+  scope :unapproved, -> { where( is_approved: false ) }
 
 
   def is_buyer?
@@ -41,10 +41,6 @@ class User < ActiveRecord::Base
 
   def approve!
     self.update_attributes!(is_approved: true)
-  end
-
-  def un_approved?
-    self.is_approved.blank?
   end
 
   def declined?

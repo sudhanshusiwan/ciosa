@@ -10,8 +10,8 @@ class Organization < ActiveRecord::Base
 	validates :email, :mobile, uniqueness: true
 
 	scope :all_organizations, -> { all }
-  scope :approved_organizations, -> { where( is_approved: true ) }
-  scope :unapproved_organizations, -> { where( is_approved: false ) }
+  scope :approved, -> { where( is_approved: true ) }
+  scope :unapproved, -> { where( is_approved: false ) }
 
 	def approved?
     self.is_approved == true
@@ -19,10 +19,6 @@ class Organization < ActiveRecord::Base
 
   def approve!
     self.update_attributes!(is_approved: true)
-  end
-
-  def un_approved?
-    self.is_approved.blank?
   end
 
   def declined?

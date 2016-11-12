@@ -75,13 +75,12 @@ ActiveRecord::Schema.define(version: 20161112223807) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "user_id",                          null: false
-    t.integer  "total_price",                      null: false
-    t.string   "billing_address",                  null: false
-    t.string   "delivery_address",                 null: false
+    t.integer  "user_id",          null: false
+    t.integer  "total_price",      null: false
+    t.string   "billing_address",  null: false
+    t.string   "delivery_address", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "cancelled",        default: false, null: false
   end
 
   create_table "organizations", force: :cascade do |t|
@@ -117,12 +116,12 @@ ActiveRecord::Schema.define(version: 20161112223807) do
   add_index "product_categories", ["product_id", "category_id"], name: "product_category_index", unique: true, using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.string   "name",                             null: false
-    t.text     "description",                      null: false
-    t.integer  "price",                            null: false
-    t.string   "approval_status",    default: "f", null: false
-    t.integer  "available_quantity",               null: false
-    t.integer  "creator_id",                       null: false
+    t.string   "name",               null: false
+    t.text     "description",        null: false
+    t.integer  "price",              null: false
+    t.boolean  "approval_status"
+    t.integer  "available_quantity", null: false
+    t.integer  "creator_id",         null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"

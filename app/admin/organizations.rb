@@ -2,8 +2,8 @@ ActiveAdmin.register Organization do
 
 
 	scope 'All', :all_organizations
-  scope 'Approved Organizations', :approved_organizations
-  scope 'Un Approved Organizations', :unapproved_organizations
+  scope 'Approved Organizations', :approved
+  scope 'Un Approved Organizations', :unapproved
 
 
   index do
@@ -19,13 +19,13 @@ ActiveAdmin.register Organization do
   end
 
   action_item( :approve, only: :show ) do
-    if resource.un_approved? || resource.declined?
+    if resource.is_approved.nil? || resource.declined?
       link_to 'Approve', approve_admin_organization_path
     end
   end
 
   action_item( :decline, only: :show ) do
-    if resource.un_approved? || resource.approved?
+    if resource.is_approved.nil? || resource.approved?
       link_to 'Decline', decline_admin_organization_path
     end
   end

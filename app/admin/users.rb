@@ -1,9 +1,8 @@
 ActiveAdmin.register User do
 
-
 	scope 'All', :all_users
-  scope 'Approved User', :approved_users
-  scope 'Un Approved User', :unapproved_users
+  scope 'Approved User', :approved
+  scope 'Un Approved User', :unapproved
 
 
   index do
@@ -19,13 +18,13 @@ ActiveAdmin.register User do
   end
 
   action_item( :approve, only: :show ) do
-    if resource.declined? || ( resource.is_seller? && resource.un_approved? )
+    if resource.declined? || ( resource.is_seller? && resource.is_approved.nil? )
       link_to 'Approve', approve_admin_user_path
     end
   end
 
   action_item( :decline, only: :show ) do
-    if resource.approved? || ( resource.is_seller? && resource.approved? )
+    if resource.approved? || ( resource.is_seller? && resource.is_approved.nil? )
       link_to 'Decline', decline_admin_user_path
     end
   end
