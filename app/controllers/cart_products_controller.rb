@@ -1,30 +1,31 @@
 class CartProductsController < ApplicationController
-  before_action :set_cart_product, only: [ :update, :destroy, :show ]
+  before_action :authenticate_user!
+  before_action :set_product, only: [:create]
+  before_action :set_cart_product, only: [:update, :destroy, :show]
 
   def index
-    @cart_product = current_user.cart_products
+    @cart_products = current_user.cart_products.includes(:product)
   end
 
   def create
-    @cart_product = CartProduct.create!( cart_product_params )
+    @cart_product = CartProduct.create!(product_id: @product.id, user_id: current_user.id, quantity: 1)
 
-    render json: { status: true, message: 'Successfully added product to cart' } and return
+    render json: { status: false, message: "Product successfully added to cart"  }
 
   rescue => ex
-    render json: { status: false, message: "#{ex.message}" }
+    render json: { status: false, message: "Error while creating cart #{ex.message}"  }
   end
 
+  # todo change this ajax call
   def update
-    @cart_product.update_attributes!(cart_product_params)
+    response_hash =  @cart_product.update_product_quantity( params[:quantity] )
+    render json: response_hash
 
-    redirect_to products_path
-  rescue Exception => ex
-    flash[:error] = ex.message
-    @cart_product = CartProduct.new(cart_product_params)
-
-    render :new
+  rescue => ex
+    render json: { status: false, message: "Error while updating cart #{ex.message}" }
   end
 
+  # todo change this to ajax call
   def destroy
     @cart_product.destroy!
 
@@ -36,13 +37,11 @@ class CartProductsController < ApplicationController
 
   private
 
+  def set_product
+    @product = Product.where(id: params[:pid]).first
+  end
+
   def set_cart_product
     @cart_product = CartProduct.where( id: params[:id] ).first
   end
-
-  def cart_product_params
-    cart_product_params = params.require(:cart_product).permit(:product_id, :quantity)
-    cart_product_params.merge( user_id: current_user.id )
-  end
-
 end

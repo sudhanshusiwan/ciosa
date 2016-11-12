@@ -1,22 +1,23 @@
 class OrdersController < ApplicationController
-  before_action :set_product, only: [:edit, :update]
+  before_action :set_product, only: [:create, :edit, :update]
 
   def index
     @orders = current_user.orders
   end
 
   def create
-    cart_product_quantity_hash = params[:cart_product_quantity_hash]
+    cart_product_ids = params[:cart_product_ids]
     order_params = params[:order_params]
 
-    Order.create_order_and_ordered_products(cart_product_quantity_hash, order_params, current_user)
+    Order.create_order_and_ordered_products(cart_product_ids, order_params, current_user)
 
     redirect_to( products_path, success: 'Order has been placed successfully') and return
   rescue Exception => ex
+    puts ex.message
+    puts ex.backtrace
     flash[:error] = ex.message
-    @product = Product.new(product_params)
 
-    render :new
+    redirect_to( products_path, success: 'Error occured while placing order')
   end
 
   def show

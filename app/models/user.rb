@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
   USER_TYPE_SELLER = 'seller'
   USER_TYPE_ADMIN = 'admin'
 
+  has_many :cart_products
+  has_many :orders
+
+
   private
 
   def update_user_type

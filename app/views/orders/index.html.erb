@@ -1,0 +1,4 @@
+<div> <% @orders.each do |order| %> </div>
+      <div> <%= order.created_at %> </div>
+      <div> <%= link_to( 'Destroy Order', orders_path( id: order.id ), method: :delete )%> </div>
+<div> <% end %> </div>
