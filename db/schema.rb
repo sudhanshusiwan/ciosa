@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20161112194408) do
   add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
   add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
 
+  create_table "cart_products", force: :cascade do |t|
+    t.integer  "product_id", null: false
+    t.integer  "user_id",    null: false
+    t.integer  "quantity",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string   "name",       null: false
     t.datetime "created_at"
@@ -39,11 +47,20 @@ ActiveRecord::Schema.define(version: 20161112194408) do
 
   add_index "categories", ["name"], name: "index_categories_on_name", unique: true, using: :btree
 
+  create_table "ordered_products", force: :cascade do |t|
+    t.integer  "product_id", null: false
+    t.integer  "order_id",   null: false
+    t.integer  "price",      null: false
+    t.integer  "quantity",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "orders", force: :cascade do |t|
-    t.integer  "product_id",                   null: false
-    t.integer  "user_id",                      null: false
-    t.integer  "price",                        null: false
-    t.boolean  "is_completed", default: false, null: false
+    t.integer  "user_id",          null: false
+    t.integer  "total_price",      null: false
+    t.string   "billing_address",  null: false
+    t.string   "delivery_address", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -60,6 +77,7 @@ ActiveRecord::Schema.define(version: 20161112194408) do
     t.boolean "is_eco_friendly",                null: false
     t.boolean "can_do_logistics",               null: false
     t.string  "products_sold"
+    t.boolean "is_approved"
   end
 
   add_index "organizations", ["can_do_logistics"], name: "index_organizations_on_can_do_logistics", using: :btree
@@ -84,6 +102,7 @@ ActiveRecord::Schema.define(version: 20161112194408) do
     t.text     "description",                      null: false
     t.integer  "price",                            null: false
     t.string   "approval_status",    default: "f", null: false
+    t.integer  "available_quantity",               null: false
     t.integer  "creator_id",                       null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
@@ -94,27 +113,27 @@ ActiveRecord::Schema.define(version: 20161112194408) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                   default: "",    null: false
-    t.string   "email",                  default: "",    null: false
-    t.string   "mobile",                 default: "",    null: false
+    t.string   "name",                   default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "mobile",                 default: "", null: false
     t.string   "address"
-    t.string   "user_type",              default: "",    null: false
+    t.string   "user_type",              default: "", null: false
     t.integer  "organization_id"
     t.string   "pan_number"
     t.string   "bank_name"
     t.string   "account_number"
-    t.boolean  "is_approved",            default: false, null: false
-    t.string   "encrypted_password",     default: "",    null: false
+    t.boolean  "is_approved"
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,     null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

@@ -11,7 +11,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :pan_number
       t.string :bank_name
       t.string :account_number
-      t.boolean :is_approved, null: false, default: false
+      t.boolean :is_approved
       t.string :encrypted_password, null: false, default: ""
 
       ## Recoverable

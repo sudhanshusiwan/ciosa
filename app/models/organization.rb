@@ -9,4 +9,27 @@ class Organization < ActiveRecord::Base
 						:is_store, :is_eco_friendly, :can_do_logistics, presence: true
 	validates :email, :mobile, uniqueness: true
 
+	scope :all_organizations, -> { all }
+  scope :approved_organizations, -> { where( is_approved: true ) }
+  scope :unapproved_organizations, -> { where( is_approved: false ) }
+
+	def approved?
+    self.is_approved == true
+  end
+
+  def approve!
+    self.update_attributes!(is_approved: true)
+  end
+
+  def un_approved?
+    self.is_approved.blank?
+  end
+
+  def declined?
+    self.is_approved == false
+  end
+
+  def decline!
+    self.update_attributes!(is_approved: false)
+  end
 end

@@ -52,7 +52,7 @@
         <div id="seller_form">
           <div class="field">
             <%= f.label :organization_id %><br />
-            <%= f.collection_select :organization_id, Organization.all, :id, :name %>
+            <%= f.collection_select :organization_id, Organization.approved_organizations, :id, :name %>
           </div>
 
           <div class="field">

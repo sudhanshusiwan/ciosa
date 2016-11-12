@@ -12,6 +12,7 @@ class CreateOrganizations < ActiveRecord::Migration
       t.boolean :is_eco_friendly,								null: false
       t.boolean :can_do_logistics,							null: false
       t.string :products_sold
+      t.boolean :is_approved
     end
 
 	  add_index :organizations, :creator_id
