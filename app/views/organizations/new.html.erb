@@ -1,0 +1,14 @@
+<%= semantic_form_for @organization do |f| %>
+	<%= f.input :name %>
+	<%= f.input :address %>
+	<%= f.input :organization_type, as: :select, collection: ['NGO', 'Store'] %>
+	<%= f.input :mobile %>
+	<%= f.input :email %>
+	<%= f.input :pan_tin_number %>
+	<%= f.input :is_store %>
+	<%= f.input :is_eco_friendly %>
+	<%= f.input :products_sold %>
+	<%= f.input :can_do_logistics %>
+
+	<%= f.submit %>
+<% end %>
