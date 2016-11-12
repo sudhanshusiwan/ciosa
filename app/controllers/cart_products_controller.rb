@@ -39,9 +39,8 @@ class CartProductsController < ApplicationController
   end
 
   def update
-    response_hash =  @cart_product.update_product_quantity( params[:quantity] )
+    render json: @cart_product.update_product_quantity( params[:quantity] )
 
-    render json: response_hash
   rescue => ex
     render json: { status: false, message: "Error while updating cart #{ex.message}" }
   end

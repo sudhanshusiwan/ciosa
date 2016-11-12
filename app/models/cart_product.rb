@@ -11,18 +11,17 @@ class CartProduct < ActiveRecord::Base
     requested_quantity = self.quantity + quantity
 
     if requested_quantity > product.available_quantity
-      response_hash = { status: false, message: 'Product ran out of stock' }
-      return response_hash
+      return { status: false, message: 'Product ran out of stock', quantity: self.quantity }
     elsif quantity <= 0
-      self.destroy!
-
-      response_hash = { status: false, message: 'Product got deleted from cart' }
-      return response_hash
+      return { status: false, message: 'Quantity cannot be lesser than or equal to Zero', quantity: self.quantity }
     end
 
     available_quantity = ( product.available_quantity - quantity )
-    product.update_attributes!( available_quantity: available_quantity )
+    CartProduct.transaction do
+      product.update_attributes!( available_quantity: available_quantity )
+      self.update_attributes!(quantity: requested_quantity)
+    end
 
-    response_hash
+    response_hash.merge!(quantity: self.quantity)
   end
 end
