@@ -1,6 +1,6 @@
 <%= flash[:error] %>
 
-<%= form_for @product do |f| %>
+<%= semantic_form_for @product do |f| %>
     <%= f.input :name, class: 'txt-box', autofocus: true %>
     <%= f.input :description, class: 'txt-box' %>
     <%= f.select :categories,
