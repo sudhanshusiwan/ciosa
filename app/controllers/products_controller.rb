@@ -14,8 +14,8 @@ class ProductsController < ApplicationController
       redirect_to products_path and return
     end
 
-    products = Product.where('LOWER(name) like ?', "%#{params[:q]}%")
-    products += Category.where('LOWER(name) like ?', "%#{params[:q]}%").includes(:products).flat_map(&:products)
+    products = Product.where('LOWER(name) like ?', "%#{params[:q].downcase}%")
+    products += Category.where('LOWER(name) like ?', "%#{params[:q].downcase}%").includes(:products).flat_map(&:products)
 
     @products = products.uniq
 
