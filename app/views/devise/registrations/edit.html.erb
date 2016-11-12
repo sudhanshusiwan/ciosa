@@ -44,9 +44,11 @@
           <%= f.text_field :address %>
         </div>
 
-        <a href='#'>Make me a seller</a>
-
-        <div>
+        <div class="field">
+          <input type="checkbox" id="make_me_a_seller" />
+          <label for="make_me_a_seller">Make me a seller</label>
+        </div>
+        <div id="seller_form">
           <div class="field">
             <%= f.label :organization_id %><br />
             <%= f.collection_select :organization_id, Organization.all, :id, :name %>
@@ -81,6 +83,13 @@
 
     $(document).ready(function() {
         $('select').material_select();
+        $("#seller_form").css("display", "none");
     });
-
+    $("#make_me_a_seller").click(function(){
+        if($("#make_me_a_seller").is(':checked')){
+            $("#seller_form").css("display", "block");
+        }else{
+            $("#seller_form").css("display", "none")
+        }
+    })
 </script>
