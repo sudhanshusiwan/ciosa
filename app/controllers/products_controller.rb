@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    product_params = params.require(:product).require(:name, :description, :price, :approval_status)
+    product_params = params.permit(:product).require(:name, :description, :price, category_ids: [])
     product_params.merge!(creator_id: 1)
   end
 end
