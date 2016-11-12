@@ -1,0 +1,8 @@
+<% @products.each do |product| %>
+    <%= product.name %>
+    <%= product.price %>
+    <%= product.categores.map(&:name).to_sentance %>
+
+    <%= link_to 'Edit', edit_product_path(id: product.id), method: :post %> |
+    <%= link_to 'Delete', product_path(id: product.id), method: :destroy %> |
+<% end %>

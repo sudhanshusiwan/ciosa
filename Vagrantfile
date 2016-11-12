@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
   # Required for NFS to work, pick any local IP
   # config.vm.network 'private_network', ip: '192.168.33.10'
 
-  config.vm.synced_folder '.', '/vagrant', type: 'rsync', rsync__auto: true, rsync__exclude: ['.git/', 'tmp/pids/'], id: 'ciosa-dev'
+  config.vm.synced_folder '.', '/vagrant', type: 'rsync', rsync__auto: true, rsync__exclude: ['.git/', 'tmp/pids/', 'tmp/storage'], id: 'ciosa-dev'
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on
