@@ -3,7 +3,7 @@ development: &postgres
   timeout: 5000
   encoding: utf8
   reconnect: false
-  database: login_and_payment
+  database: ciosa
   pool: 25
   username: chris
   password: root
