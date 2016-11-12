@@ -1,6 +1,6 @@
 # CIOSA
 
-This is the marketplace of NGOs and Social Entrepreneurs to come and sell their eco-friendly products directly. Payment will be handled offline. This website is will act as a bridge between the sellers and buyers. 
+This is the marketplace of NGOs and Social Entrepreneurs to come and sell their eco-friendly products directly. Payment will be handled offline. This website will act as a bridge between the sellers and buyers. 
 
 Gem Used: Spree 
 
