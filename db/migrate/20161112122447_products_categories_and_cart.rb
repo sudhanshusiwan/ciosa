@@ -5,6 +5,7 @@ class ProductsCategoriesAndCart < ActiveRecord::Migration
       t.text   "description", null: false
       t.integer   "price", null: false
       t.string   "approval_status", null: false, default: false
+      t.integer   "available_quantity", null: false
       t.integer   "creator_id", null: false
       t.attachment :image
 
@@ -27,10 +28,29 @@ class ProductsCategoriesAndCart < ActiveRecord::Migration
     add_index "product_categories", ["product_id", "category_id"], unique: true, name: 'product_category_index'
 
     create_table "orders", :force => true do |t|
+      t.integer   "user_id", null: false
+      t.integer   "total_price", null: false
+      t.string   "billing_address", null: false
+      t.string   "delivery_address", null: false
+
+      t.timestamps
+    end
+
+    create_table "cart_products", :force => true do |t|
       t.integer   "product_id", null: false
       t.integer   "user_id", null: false
+      t.integer   "quantity", null: false
+
+      t.timestamps
+    end
+
+    create_table "ordered_products", :force => true do |t|
+      t.integer   "product_id", null: false
+      t.integer   "order_id", null: false
       t.integer   "price", null: false
-      t.boolean   "is_completed", null: false, default: false
+      t.integer   "quantity", null: false
+
+
       t.timestamps
     end
   end

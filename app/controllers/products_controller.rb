@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update]
 
   def index
-    @products = Product.approved.includes(:categories)
+    @products = Product.all #.approved.includes(:categories)
   end
 
   def new
@@ -45,10 +45,10 @@ class ProductsController < ApplicationController
     redirect_to products_path
   end
 
-
   private
+
   def set_product
-    @product = Product.where( id: params[:id] ).first
+    @product = Product.where( id: params[:id] ).includes(:categories).first
   end
 
   def product_params

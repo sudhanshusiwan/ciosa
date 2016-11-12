@@ -1,12 +1,12 @@
 <%= flash[:error] %>
 
 <%= form_for @product do |f| %>
-    <%= f.text_field :name, class: 'txt-box', autofocus: true %>
-    <%= f.text_area :description, class: 'txt-box' %>
+    <%= f.input :name, class: 'txt-box', autofocus: true %>
+    <%= f.input :description, class: 'txt-box' %>
     <%= f.select :categories,
-                 Category.all.collect { |category| [category.name, category.id] },
+                 options_for_select(Category.all.collect { |category| [category.name, category.id] },  @product.categories.map(&:id) ),
                  { multiple: true, include_blank: true } %>
-    <%= f.file_field :image, id:'product-pic-input'%>
+    <%= f.input :image, id:'product-pic-input'%>
     <%= f.submit 'Create Product Request', class: 'btn beta-btn', id: 'submit-btn' %>
 
 <% end %>
