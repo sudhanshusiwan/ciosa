@@ -6,7 +6,6 @@
           <%= f.input :name, class: 'txt-box', autofocus: true %>
           <%= f.input :price, class: 'txt-box' %>
           <%= f.input :description, class: 'txt-box' %>
-          <%= f.input :price, class: 'txt-box' %>
           <%= f.input :available_quantity, class: 'txt-box' %>
           <%= f.input :categories, :as => :select, :label => 'Category', multiple: true, include_hidden: false,
                       :collection => Category.all.map { |category| [category.name, category.id] } %>
