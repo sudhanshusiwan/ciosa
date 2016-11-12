@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
   belongs_to :organization
 
-  validates :email, :mobile, :name, :user_type, presence: true
+  validates :email, :mobile, :name, :user_type, :is_approved, presence: true
 
   before_validation :update_user_type
 
