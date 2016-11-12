@@ -1,4 +1,5 @@
 class OrganizationsController < ActionController::Base
+	layout "application"
 	before_action :authenticate_user!
 
 	def new
