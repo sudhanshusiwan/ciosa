@@ -1,27 +1,12 @@
+<%= flash[:error] %>
+
 <%= form_for @product do |f| %>
-    <ul class="form-list">
-      <li class="item">
-        <%= f.label 'Name', class: 'f-label field-required' %>
-        <%= f.text_field :name, class: 'txt-box', autofocus: true %>
-      </li>
+    <%= f.text_field :name, class: 'txt-box', autofocus: true %>
+    <%= f.text_area :description, class: 'txt-box' %>
+    <%= f.select :categories,
+                 options_for_select(Category.all.collect { |category| [category.name, category.id] }),
+                 multiple: true %>
+    <%= f.file_field :image, id:'product-pic-input'%>
+    <%= f.submit 'Create Product Request', class: 'btn beta-btn', id: 'submit-btn' %>
 
-      <li class="item">
-        <%= f.label 'Description', class: 'f-label field-required' %>
-        <%= f.text_area :description, class: 'txt-box' %>
-      </li>
-
-      <li class="item">
-        <%= f.label 'Price', class: 'f-label field-required' %>
-        <%= f.text_field :price, class: 'txt-box' %>
-      </li>
-
-      <li class="item">
-        <%= f.label 'Categories', class: 'f-label field-required' %>
-        <%= f.select :categories, options_for_select( Category.all.collect { |category| [category.name, category.id] } ), prompt: 'Select Category' %>
-      </li>
-
-      <li class="item">
-        <%= f.submit 'Create Product Request', class: 'btn beta-btn', id: 'submit-btn' %>
-      </li>
-    </ul>
 <% end %>

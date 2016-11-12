@@ -15,7 +15,7 @@ class ProductsController < ApplicationController
     redirect_to product_path(id: @product.id)
   rescue Exception => ex
     flash[:error] = ex.message
-    @product = Product.build(product_params)
+    @product = Product.new(product_params)
 
     render :new
   end
@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
     redirect_to product_path(id: @product.id)
   rescue Exception => ex
     flash[:error] = ex.message
-    @product = Product.build(product_params)
+    @product = Product.new(product_params)
 
     render :new
   end
@@ -52,7 +52,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    product_params = params.permit(:product).require(:name, :description, :price, category_ids: [])
+    product_params = params.require(:product).permit(:name, :description, :price, :image, categories: [])
     product_params.merge!(creator_id: 1)
   end
 end
