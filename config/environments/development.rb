@@ -42,5 +42,7 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
+  Paperclip::Attachment.default_options[:path] = File.join(Rails.root, 'tmp', 'storage')
+
   BetterErrors::Middleware.allow_ip! '10.0.2.2' if defined?(BetterErrors)
 end

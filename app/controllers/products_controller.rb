@@ -9,6 +9,15 @@ class ProductsController < ApplicationController
     @product = Product.new
   end
 
+  def search
+    products = Product.where('LOWER(name) like ?', "%#{params[:q]}%")
+    products += Category.where('LOWER(name) like ?', "%#{params[:q]}%").includes(:products).flat_map(&:products)
+
+    @products = products.uniq
+
+    render :index
+  end
+
   def create
     @product = Product.create!(product_params)
 

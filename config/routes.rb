@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   root 'products#index'
 
-  resources :products
+  resources :products do
+    collection do
+      get :search
+    end
+  end
+
   resources :organizations
 
   resources :cart_products, :only => [:index, :create, :update, :destroy]
