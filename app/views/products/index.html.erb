@@ -4,5 +4,5 @@
     <%= product.categories.map(&:name).join %>
 
     <%= link_to 'Edit', edit_product_path(id: product.id) %> |
-    <%= link_to 'Delete', product_path(id: product.id), method: :destroy %> |
+    <%= link_to 'Delete', product_path(id: product.id), method: :delete %> |
 <% end %>
