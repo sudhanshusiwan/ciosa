@@ -2,7 +2,7 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :destroy]
 
   def index
-    @products = Product.all #.approved.includes(:categories)
+    @products = Product.order('id desc').all #.approved.includes(:categories)
   end
 
   def new

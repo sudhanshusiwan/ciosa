@@ -81,9 +81,7 @@
 </tr>
 <tr>
   <% if @cart_products.present? %>
-      <td colspan="6" id="check-out-button" class="container row"> <%= link_to( 'Checkout', orders_path( cart_product_ids: @cart_products.map(&:id), order_params: { billing_address: 'NA', delivery_address: 'NA' } ), method: :post, class: "btn right", style: "margin-left:7px;") %> 
-	<%= link_to 'Continue Shopping', href="/", class: "btn right" =%>
-      </td>
+      <div id="check-out-button"> <%= link_to( 'Checkout', orders_path( cart_product_ids: @cart_products.map(&:id), order_params: { billing_address: 'NA', delivery_address: 'NA' } ), method: :post) %>  </div>
   <% else %>
       <td colspan="6" id="check-out-button" class="container row">
       No Products in cart, please search for products

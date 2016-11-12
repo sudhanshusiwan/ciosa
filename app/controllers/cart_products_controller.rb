@@ -4,7 +4,7 @@ class CartProductsController < ApplicationController
   before_action :set_cart_product, only: [:update, :destroy, :show]
 
   def index
-    @cart_products = current_user.cart_products.includes(:product)
+    @cart_products = current_user.cart_products.order('id desc').includes(:product)
   end
 
   def create

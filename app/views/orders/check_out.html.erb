@@ -1,0 +1,31 @@
+<%= flash[:error] %>
+
+<%= form_tag(orders_path, method: :post) do %>
+    <%= hidden_field_tag 'cart_product_ids', @cart_products.map(&:id) %>
+    Billing Address:
+    <%= text_area_tag 'billing_address', current_user.address %>
+    Delivery Address:
+    <%= text_area_tag 'delivery_address', current_user.address %>
+
+    <%= submit_tag(value='Place Order') %>
+<% end %>
+
+<div>
+  <% @cart_products.each do |cart_product| %>
+      <% product = cart_product.product %>
+      <div>
+        Cart Product id: <%= cart_product.id %>
+      </div>
+      <div>
+        <%= product.name %>
+      </div>
+      <div>
+        <%= product.description %>
+      </div>
+      <div>
+        <%= cart_product.quantity %>
+      </div>
+  <% end %>
+
+  <%= link_to 'Change products?', cart_products_path %>
+</div>

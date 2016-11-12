@@ -1,3 +1,5 @@
+<%= link_to 'View all orders', orders_path %>
+
 Total Price: <%= @order.total_price %>
 
 <% @order.ordered_products.includes(:product).each do |ordered_product| %>

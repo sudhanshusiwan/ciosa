@@ -1,3 +1,5 @@
+<%= link_to 'Products', products_path %> | <%= link_to 'Cart', cart_products_path %>
+
 <ul>
   <% @orders.each do |order| %>
       <strong><%= order.cancelled ? 'Order Canceled' : '' %></strong>
@@ -9,8 +11,10 @@
             <%= link_to ordered_product.product.name, product_path(id: ordered_product.product_id) %> - <%= ordered_product.price %>
         <% end %>
       </li>
-      <li>
-        <%= link_to( 'Cancer order', order_path(id: order.id), method: :delete )%>
-      </li>
+      <% unless order.cancelled %>
+          <li>
+            <%= link_to( 'Cancer order', cancel_order_path(id: order.id), method: :post )%>
+          </li>
+      <% end %>
   <% end %>
 </ul>
