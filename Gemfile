@@ -31,6 +31,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'puma'
 
 gem 'devise'
+gem 'materialize-sass'
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 
 gem 'paperclip'
 gem 'after_party'
