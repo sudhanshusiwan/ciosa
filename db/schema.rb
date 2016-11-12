@@ -85,6 +85,9 @@ ActiveRecord::Schema.define(version: 20161112145823) do
     t.string   "address"
     t.string   "user_type",              default: "", null: false
     t.integer  "organization_id"
+    t.string   "pan_number"
+    t.string   "bank_name"
+    t.string   "account_number"
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
