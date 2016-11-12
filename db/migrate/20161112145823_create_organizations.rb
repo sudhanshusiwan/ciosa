@@ -11,7 +11,7 @@ class CreateOrganizations < ActiveRecord::Migration
       t.boolean :is_store,											null: false
       t.boolean :is_eco_friendly,								null: false
       t.boolean :can_do_logistics,							null: false
-      t.text :products_sold, array: true
+      t.string :products_sold
     end
 
 	  add_index :organizations, :creator_id
