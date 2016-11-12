@@ -21,10 +21,21 @@ class CartProductsController < ApplicationController
     end
 
     flash[:success] = 'Product successfully added to cart'
-    redirect_to cart_products_path
+
+    if params[:q].present?
+      redirect_to products_path(q: params[:q])
+    else
+      redirect_to products_path
+    end
+
   rescue => ex
     flash[:success] = "Error while creating cart #{ex.message}"
-    redirect_to cart_products_path
+
+    if params[:q].present?
+      redirect_to products_path(q: params[:q])
+    else
+      redirect_to products_path
+    end
   end
 
   def update
