@@ -5,10 +5,9 @@
     <%= flash[:error] %>
     <%= form_tag(orders_path, method: :post) do %>
         <%= hidden_field_tag 'cart_product_ids', @cart_products.map(&:id) %>
-        <label for="billing_address">Billing Address</label>
-        <%= text_area_tag 'billing_address', current_user.address, class: 'materialize-textarea' %>
+        <%= hidden_field_tag 'billing_address', current_user.address, class: 'materialize-textarea' %>
         <label for="delivery_address">Delivery Address</label>
-        <%= text_area_tag 'delivery_address', current_user.address , class: 'materialize-textarea'%>
+        <%= text_area_tag 'delivery_address', current_user.address , class: 'materialize-textarea' %>
 
         <%= submit_tag(value='Place Order', class: "btn") %>
     <% end %>

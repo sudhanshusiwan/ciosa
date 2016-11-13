@@ -1,7 +1,7 @@
 class CartProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:create]
-  before_action :set_cart_product, only: [:update, :update_quantity, :show]
+  before_action :set_cart_product, only: [:update_quantity, :show, :destroy]
 
   def index
     @cart_products = current_user.cart_products.order('id desc').includes(:product)
@@ -49,10 +49,6 @@ class CartProductsController < ApplicationController
     @cart_product.destroy!
 
     redirect_to cart_products_path
-  rescue => ex
-    flash[:error] = ex.message
-
-    redirect_to cart_products_path
   end
 
   private
@@ -62,6 +58,6 @@ class CartProductsController < ApplicationController
   end
 
   def set_cart_product
-    @cart_product = CartProduct.where( id: params[:id] ).first
+    @cart_product = CartProduct.where(id: params[:id]).first
   end
 end
