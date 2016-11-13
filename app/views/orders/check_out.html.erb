@@ -1,31 +1,58 @@
-<%= flash[:error] %>
+<div class="row">
 
-<%= form_tag(orders_path, method: :post) do %>
-    <%= hidden_field_tag 'cart_product_ids', @cart_products.map(&:id) %>
-    Billing Address:
-    <%= text_area_tag 'billing_address', current_user.address %>
-    Delivery Address:
-    <%= text_area_tag 'delivery_address', current_user.address %>
+  <div class="col s6">
 
-    <%= submit_tag(value='Place Order') %>
-<% end %>
+    <%= flash[:error] %>
+    <%= form_tag(orders_path, method: :post) do %>
+        <%= hidden_field_tag 'cart_product_ids', @cart_products.map(&:id) %>
+        <label for="billing_address">Billing Address</label>
+        <%= text_area_tag 'billing_address', current_user.address, class: 'materialize-textarea' %>
+        <label for="delivery_address">Delivery Address</label>
+        <%= text_area_tag 'delivery_address', current_user.address , class: 'materialize-textarea'%>
 
-<div>
-  <% @cart_products.each do |cart_product| %>
-      <% product = cart_product.product %>
-      <div>
-        Cart Product id: <%= cart_product.id %>
-      </div>
-      <div>
-        <%= product.name %>
-      </div>
-      <div>
-        <%= product.description %>
-      </div>
-      <div>
-        <%= cart_product.quantity %>
-      </div>
-  <% end %>
+        <%= submit_tag(value='Place Order', class: "btn") %>
+    <% end %>
 
-  <%= link_to 'Change products?', cart_products_path %>
+
+  </div>
+  <div class="col s6">
+    <div>
+      <table class="highlight responsive-table">
+        <thead>
+        <tr>
+          <th data-field="product">Product</th>
+          <th data-field="descr">Description</th>
+          <th data-field="quantity">Quantity</th>
+          <th data-field="price">Unit Price</th>
+          <th data-field="price">Total Price</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @cart_products.each do |cart_product| %>
+            <tr>
+              <% product = cart_product.product %>
+              <td>
+                <%= product.name %>
+              </td>
+              <td>
+                <%= product.description %>
+              </td>
+              <td>
+                <%= cart_product.quantity %>
+              </td>
+              <td>
+                <%= product.price %>
+              </td>
+              <td id="qn_<%=cart_product.id%>">
+                <%= cart_product.quantity * product.price %>
+              </td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <%= link_to 'Change products?', cart_products_path %>
+    </div>
+  </div>
+
 </div>
+
