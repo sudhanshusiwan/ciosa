@@ -1,4 +1,6 @@
 ActiveAdmin.register User do
+  permit_params :name, :email, :password, :password_confirmation, :current_password, 
+                :mobile, :address, :organization_id, :pan_number, :bank_name, :account_number
 
 	scope 'All', :all_users
   scope 'Approved User', :approved
@@ -16,6 +18,8 @@ ActiveAdmin.register User do
 
     actions
   end
+
+  form :partial => 'form'
 
   action_item( :approve, only: :show ) do
     if resource.declined? || ( resource.is_seller? && resource.is_approved.nil? )

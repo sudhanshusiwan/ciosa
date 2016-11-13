@@ -1,0 +1,13 @@
+<%= semantic_form_for [:admin, @user] do |form| %>
+    <%=form.inputs 'Component Details' do %>
+        <%= form.input :name, :label => 'Name' %>
+        <%= form.input :email %>
+        <%= form.input :mobile %>
+        <%= form.input :address %>
+        <%= form.input :pan_number %>
+        <%= form.input :bank_name %>
+        <%= form.input :account_number %>
+    <% end %>
+
+    <%= form.actions %>
+<% end %>

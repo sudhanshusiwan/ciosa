@@ -1,4 +1,5 @@
 ActiveAdmin.register Product do
+  permit_params :name, :description, :price, :available_quantity, :image, categories: []
 
 	scope 'All', :all_products
   scope 'Approved Product', :approved

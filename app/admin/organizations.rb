@@ -1,4 +1,6 @@
 ActiveAdmin.register Organization do
+  permit_params :name, :creator, :email, :mobile, :address, :organization_type, :products_sold,
+                :pan_tin_number, :is_store, :is_eco_friendly, :can_do_logistics
 
 
 	scope 'All', :all_organizations
