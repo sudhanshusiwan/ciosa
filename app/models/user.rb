@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Approval
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -19,8 +21,6 @@ class User < ActiveRecord::Base
   has_many :orders
 
   scope :all_users, -> { all }
-  scope :approved, -> { where( is_approved: true ) }
-  scope :unapproved, -> { where( is_approved: false ) }
 
 
   def is_buyer?
@@ -33,22 +33,6 @@ class User < ActiveRecord::Base
 
   def is_admin?
     USER_TYPE_ADMIN == self.user_type
-  end
-
-  def approved?
-    self.is_approved == true
-  end
-
-  def approve!
-    self.update_attributes!(is_approved: true)
-  end
-
-  def declined?
-    self.is_approved == false
-  end
-
-  def decline!
-    self.update_attributes!(is_approved: false)
   end
 
 

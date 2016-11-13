@@ -4,7 +4,7 @@ class ProductsCategoriesAndCart < ActiveRecord::Migration
       t.string   "name", null: false
       t.text   "description", null: false
       t.integer   "price", null: false
-      t.boolean   "approval_status"
+      t.boolean   "is_approved"
       t.integer   "available_quantity", null: false
       t.integer   "creator_id", null: false
       t.attachment :image

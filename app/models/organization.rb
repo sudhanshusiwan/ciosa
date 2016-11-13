@@ -1,4 +1,6 @@
 class Organization < ActiveRecord::Base
+  include Approval
+
 	ORGANIZATION_TYPE_STORE = 'Store'
 	ORGANIZATION_TYPE_NGO = 'NGO'
 
@@ -10,22 +12,4 @@ class Organization < ActiveRecord::Base
 	validates :email, :mobile, uniqueness: true
 
 	scope :all_organizations, -> { all }
-  scope :approved, -> { where( is_approved: true ) }
-  scope :unapproved, -> { where( is_approved: false ) }
-
-	def approved?
-    self.is_approved == true
-  end
-
-  def approve!
-    self.update_attributes!(is_approved: true)
-  end
-
-  def declined?
-    self.is_approved == false
-  end
-
-  def decline!
-    self.update_attributes!(is_approved: false)
-  end
 end

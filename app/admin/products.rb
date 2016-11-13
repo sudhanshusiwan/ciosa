@@ -10,8 +10,7 @@ ActiveAdmin.register Product do
     column :name
     column :description
     column :price
-    column :approval_status
-    column :approval_status
+    column :is_approved
     column 'Creator' do |object|
     	object.creator.name
     end
@@ -21,13 +20,13 @@ ActiveAdmin.register Product do
   end
 
   action_item( :approve, only: :show ) do
-    if resource.declined? || resource.approval_status.nil?
+    if resource.declined? || resource.is_approved.nil?
       link_to 'Approve', approve_admin_product_path
     end
   end
 
   action_item( :decline, only: :show ) do
-    if resource.approved? || resource.approval_status.nil?
+    if resource.approved? || resource.is_approved.nil?
       link_to 'Decline', decline_admin_product_path
     end
   end
