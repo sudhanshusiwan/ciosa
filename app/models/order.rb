@@ -2,7 +2,7 @@ class Order < ActiveRecord::Base
   belongs_to :user
   has_many :ordered_products
 
-  validates :billing_address, :delivery_address, :total_price, presence: true
+  validates :delivery_address, :total_price, presence: true
 
   def self.create_order_and_ordered_products( cart_product_ids, address_params, order_user )
     order_id = nil

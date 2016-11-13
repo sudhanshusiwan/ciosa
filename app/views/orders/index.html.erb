@@ -1,20 +1,47 @@
 <%= link_to 'Products', products_path %> | <%= link_to 'Cart', cart_products_path %>
-
-<ul>
-  <% @orders.each do |order| %>
-      <strong><%= order.cancelled ? 'Order Canceled' : '' %></strong>
-      <li>
-        Order on - <%= order.created_at.in_time_zone('Chennai') %> | Total Price: <%= order.total_price %>
-      </li>
-      <li>
-        <% order.ordered_products.each do |ordered_product| %>
-            <%= link_to ordered_product.product.name, product_path(id: ordered_product.product_id) %> - <%= ordered_product.price %>
+  <div class="row">
+    <div class="col s12">
+      <table class="highlight responsive-table">
+        <thead>
+        <tr>
+          <th data-field="date">Order Date</th>
+          <th data-field="price">Total Price</th>
+          <th data-field="billing">Billing Address</th>
+          <th data-field="delivery">Delivery Address</th>
+          <th data-field="cart_products">Cart Product Details</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @orders.each do |order| %>
+            <tr>
+              <td>
+                <%= order.created_at.to_date %>
+              </td>
+              <td>
+                <%= order.total_price %>
+              </td>
+              <td>
+                <%= order.billing_address %>
+              </td>
+              <td>
+                <%= order.delivery_address %>
+              </td>
+              <td>
+                <%= link_to 'Cart Products', ordered_products_path( id: order.id ) %>
+              </td>
+              <td>
+                <i class="small material-icons">delete</i>
+              </td>s
+            </tr>
         <% end %>
-      </li>
-      <% unless order.cancelled %>
-          <li>
-            <%= link_to( 'Cancer order', cancel_order_path(id: order.id), method: :post )%>
-          </li>
-      <% end %>
-  <% end %>
-</ul>
+        <tr>
+          <td colspan="3" ></td>
+          <td style="font-weight:bold;border-top:1px solid">Total</td>
+          <td style="font-weight:bold;border-top:1px solid"><%= @total_price %></td>
+        </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+  </div>

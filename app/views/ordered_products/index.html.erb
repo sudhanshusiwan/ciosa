@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col s12">
+    <table class="highlight responsive-table">
+      <thead>
+      <tr>
+        <th data-field="name">Product</th>
+        <th data-field="price">Price</th>
+        <th data-field="billing">Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% @ordered_products.each do |ordered_product| %>
+      <% product = ordered_product.product %>
+          <tr>
+            <td>
+              <%= product.name %>
+            </td>
+            <td>
+              <%= product.price %>
+            </td>
+            <td>
+              <%= ordered_product.quantity %>
+            </td>
+          </tr>
+      <% end %>
+      <tr>
+        <td colspan="3" ></td>
+        <td style="font-weight:bold;border-top:1px solid">Total</td>
+        <td style="font-weight:bold;border-top:1px solid"><%= @ordered_products.map{ |op| op.price }.sum %></td>
+      </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+</div>

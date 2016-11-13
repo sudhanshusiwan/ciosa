@@ -5,6 +5,7 @@ class CartProductsController < ApplicationController
 
   def index
     @cart_products = current_user.cart_products.order('id desc').includes(:product)
+    @total_price = @cart_products.map{ |cp| cp.product.price }.sum
   end
 
   def create

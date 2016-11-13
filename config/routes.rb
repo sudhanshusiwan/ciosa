@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   resources :organizations
+  resources :ordered_products, only: [:index]
 
   resources :cart_products, :only => [:index, :create, :destroy] do
     post :update_quantity, on: :collection

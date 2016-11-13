@@ -97,7 +97,7 @@ class ProductsController < ApplicationController
 
   def access_to_seller_user
     unless current_user.is_seller? && current_user.approved?
-      flash[:alert] = 'You are not authorized to access this page!'
+      flash[:alert] = 'You are  not authorized to access this page!'
       redirect_to products_path and return false
     end
   end
