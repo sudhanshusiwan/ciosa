@@ -1,50 +1,61 @@
-<% @organization.errors.full_messages.each do |error_message| %>
-  <%= error_message %><br/>
-<% end %>
+<div class="row">
+  <div class="col s12">
+    <% @organization.errors.full_messages.each do |error_message| %>
+        <%= error_message %><br/>
+    <% end %>
+    <ul>
+      <%= form_for @organization do |f| %>
+          <div class="input-field">
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+          </div>
+          <div class="input-field">
+            <%= f.label :address %>
+            <%= f.text_area :address %>
+          </div>
+          <div class="input-field">
+            <%= f.label :organization_type %>
+            <%= f.select :organization_type, options_for_select( 'NGO', 'Store' ) %>
+          </div>
+          <div class="input-field">
+            <%= f.label :mobile %>
+            <%= f.text_field :mobile %>
+          </div>
+          <div class="input-field">
+            <%= f.label :email %>
+            <%= f.text_field :email %>
+          </div>
+          <div class="input-field">
+            <%= f.label :pan_tin_number %>
+            <%= f.text_field :pan_tin_number %>
+          </div>
+          <div class="input-field">
+            <%= f.label :is_store %>
+            <%= f.check_box :is_store %>
+          </div>
+          <div class="input-field">
+            <%= f.label :is_eco_friendly %>
+            <%= f.check_box :is_eco_friendly %>
+          </div>
+          <div class="input-field">
+            <%= f.label :products_sold %>
+            <%= f.text_area :products_sold %>
+          </div>
+          <div class="input-field">
+            <%= f.label :can_do_logistics %>
+            <%= f.check_box :can_do_logistics %>
+          </div>
 
-<%= form_for @organization do |f| %>
-  <div>
-    <%= f.label 'Name' %>
-    <%= f.text_field :name %>
+          <div>
+            <%= f.submit %>
+          </div>
+      <% end %>
+    </ul>
   </div>
-  <div>
-    <%= f.label 'Address' %>
-    <%= f.text_area :address %>
-  </div>
-  <div>
-    <%= f.label 'Organization Type' %>
-    <%= f.select :organization_type, options_for_select( 'NGO', 'Store' ) %>
-  </div>
-  <div>
-    <%= f.label 'Mobile' %>
-    <%= f.text_field :mobile %>
-  </div>
-  <div>
-    <%= f.label 'Email' %>
-    <%= f.text_field :email %>
-  </div>
-  <div>
-    <%= f.label 'PAN / TIN Number' %>
-    <%= f.text_field :pan_tin_number %>
-  </div>
-  <div>
-    <%= f.label 'Is Store?' %>
-    <%= f.check_box :is_store %>
-  </div>
-  <div>
-    <%= f.label 'Is eco-friendly?' %>
-    <%= f.check_box :is_eco_friendly %>
-  </div>
-  <div>
-    <%= f.label 'Products sold (separate multiple products using comma)' %>
-    <%= f.text_area :products_sold %>
-  </div>
-  <div>
-    <%= f.label 'Can do logistics?' %>
-    <%= f.check_box :can_do_logistics %>
-  </div>
+</div>
 
-  <div>
-    <%= f.submit %>
-  </div>
-<% end %>
+<script>
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
