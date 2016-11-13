@@ -29,21 +29,18 @@
 <div class="row">
   <% @products.each do |product| %>
       <div class="col s3">
+
         <div class="card">
           <div class="card-image waves-effect waves-block waves-light">
-            <img class="activator" src=<%= product.image.url %>>
+            <a href=<%= product_path(product) %>><img class="activator" src=<%= product.image.url %>></a>
           </div>
           <div class="card-content">
-            <span class="card-title activator grey-text text-darken-4"><%= product.name %><i class="material-icons right">more_vert</i></span>
+            <span class="card-title grey-text text-darken-4"><%= product.name %></span>
             <% if product.creator_id == current_user.try(:id) %>
                 <p><%= link_to 'Edit', edit_product_path(id: product.id) %> |  <%= link_to 'Delete', product_path(id: product.id), method: :destroy %></p>
             <% end %>
 
             <%= link_to 'Add to Cart', cart_products_path(pid: product.id), method: :post %>
-          </div>
-          <div class="card-reveal">
-            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-            <p><%= product.price %> <%= product.categories.map(&:name).join %></p>
           </div>
         </div>
       </div>
