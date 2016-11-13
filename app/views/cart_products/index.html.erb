@@ -30,7 +30,7 @@
               <%= cart_product.quantity * product.price %>
             </td>
             <td>
-              <i class="small material-icons">delete</i>
+              <%= link_to '<i class="small material-icons">delete</i>'.html_safe, cart_product_path(id: cart_product.id), method: :delete %>
             </td>
           </tr>
       <% end %>
