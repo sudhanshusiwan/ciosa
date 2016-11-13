@@ -4,11 +4,10 @@
         color: #000;
     }
 </style>
-<ul id="dropdown1" class="dropdown-content">
-  <li><a href="#!">one</a></li>
-  <li><a href="#!">two</a></li>
-  <li class="divider"></li>
-  <li><a href="#!">three</a></li>
+<ul id="userInfo" class="dropdown-content">
+  <li><%= link_to 'Order History', edit_user_registration_path %></li>
+  <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
+  <li><%= link_to "Logout", destroy_user_session_path, method: :get, :class => 'navbar-link'  %></li>
 </ul>
 <nav style="background-color:#A0225F">
   <div class="nav-wrapper">
@@ -20,15 +19,12 @@
         <% end %>
       </li>
       <% if user_signed_in? %>
-          <li>Hi, <strong><%= current_user.name %></strong>.</li>
-
           <% if current_user.is_seller? && current_user.approved? %>
             <li><%= link_to 'Manage My Products', manage_my_products_products_path, :class => 'navbar-link' %></li>
           <% end %>
 
-          <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
           <li><a href="<%= cart_products_path %>">Cart <span class="new badge"><%= cart_product_count %></span></a></li>
-          <li><%= link_to "Logout", destroy_user_session_path, method: :get, :class => 'navbar-link'  %></li>
+          <li><a class="dropdown-button" href="#!" data-activates="userInfo">Hi, <strong><%= current_user.name %></strong><i class="material-icons right">arrow_drop_down</i></a></li>
       <% else %>
           <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %></li>
           <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
