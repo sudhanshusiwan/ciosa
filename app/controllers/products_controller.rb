@@ -34,7 +34,9 @@ class ProductsController < ApplicationController
   end
 
   def show
-
+    @product = Product.find( params[:id] )
+  rescue
+    redirect_to products_path
   end
 
   def edit
