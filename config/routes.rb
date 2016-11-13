@@ -13,7 +13,10 @@ Rails.application.routes.draw do
 
   resources :organizations
 
-  resources :cart_products, :only => [:index, :create, :update, :destroy]
+  resources :cart_products, :only => [:index, :create, :destroy] do
+    post :update_quantity, on: :collection
+  end
+
   resources :orders, :only => [:index, :create, :show] do
       post :cancel, on: :member
       get :check_out, on: :collection

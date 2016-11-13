@@ -1,7 +1,7 @@
 class CartProductsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_product, only: [:create]
-  before_action :set_cart_product, only: [:update, :destroy, :show]
+  before_action :set_cart_product, only: [:update, :update_quantity, :show]
 
   def index
     @cart_products = current_user.cart_products.order('id desc').includes(:product)
@@ -38,8 +38,8 @@ class CartProductsController < ApplicationController
     end
   end
 
-  def update
-    render json: @cart_product.update_product_quantity( params[:quantity] )
+  def update_quantity
+    render json: @cart_product.update_product_quantity( params[:quantity].to_i )
 
   rescue => ex
     render json: { status: false, message: "Error while updating cart #{ex.message}" }
