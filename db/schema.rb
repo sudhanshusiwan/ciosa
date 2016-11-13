@@ -75,12 +75,13 @@ ActiveRecord::Schema.define(version: 20161113045530) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "user_id",          null: false
-    t.integer  "total_price",      null: false
-    t.string   "billing_address",  null: false
-    t.string   "delivery_address", null: false
+    t.integer  "user_id",                          null: false
+    t.integer  "total_price",                      null: false
+    t.string   "billing_address",                  null: false
+    t.string   "delivery_address",                 null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "cancelled",        default: false, null: false
   end
 
   create_table "organizations", force: :cascade do |t|
