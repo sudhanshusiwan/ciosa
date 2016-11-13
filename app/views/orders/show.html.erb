@@ -1,7 +1,18 @@
-<%= link_to 'View all orders', orders_path %>
+<div class="row">
+  <div class="col s12">
 
-Total Price: <%= @order.total_price %>
+    <h3 style="text-align: center; line-height: 1.5;">Your order has been successfully placed!!
+      <br>Thank you.<br>
+      Please visit us again.<br>
+      <%= image_tag('success.svg')%>
+    </h3>
 
-<% @order.ordered_products.includes(:product).each do |ordered_product| %>
-    <%= link_to ordered_product.product.name, product_path(id: ordered_product.product_id) %> - <%= ordered_product.price %>
-<% end %>
+
+    Total Price: <%= @order.total_price %>
+
+    <% @order.ordered_products.includes(:product).each do |ordered_product| %>
+        <%= link_to ordered_product.product.name, product_path(id: ordered_product.product_id) %> - <%= ordered_product.price %>
+    <% end %>
+  </div>
+</div>
+
