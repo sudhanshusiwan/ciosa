@@ -1,4 +1,4 @@
-class OrganizationsController < ActionController::Base
+class OrganizationsController < ApplicationController
 	layout "application"
 	before_action :authenticate_user!
 
