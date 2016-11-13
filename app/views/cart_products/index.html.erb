@@ -13,6 +13,7 @@
           </thead>
           <tbody>
           <% @cart_products.each do |cart_product| %>
+	
               <tr>
                 <% product = cart_product.product %>
                 <td>
@@ -38,10 +39,8 @@
           <tr>
             <td colspan="3" ></td>
             <td style="font-weight:bold;border-top:1px solid">Total</td>
-            <td style="font-weight:bold;border-top:1px solid"></td>
+            <td style="font-weight:bold;border-top:1px solid" id="totalPrice"></td>
           </tr>
-
-
           </tbody>
         </table>
       </div>
@@ -66,6 +65,17 @@
 <script type="application/javascript">
     $(document).ready(function() {
         $('select').material_select();
+
+    });
+
+    $(window).ready(function() {
+	var totalValue = 0;
+
+	$('[id^=qn]').each(function(id, node) { 
+	     totalValue += parseInt($(node).text().trim());
+	})
+
+	$("#totalPrice").html(totalValue);
     });
 
     $('.quantityChanger').change(function () {
@@ -83,6 +93,15 @@
                 if(response.status)
                 {
                     $('#qn_'+cid).text(response.total_price);
+                    $('#qn_'+cid).text(response.total_price);
+
+			var totalValue = 0;
+
+			$('[id^=qn]').each(function(id, node) { 
+			     totalValue += parseInt($(node).text().trim());
+			})
+
+			$("#totalPrice").html(totalValue);
                 } else {
                     alert(response.message);
                     window.location.reload();
