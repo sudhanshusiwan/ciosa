@@ -1,9 +1,35 @@
-Name: <%= @organization.name %>
-Email: <%= @organization.email %>
-Mobile: <%= @organization.mobile %>
-Organization Type: <%= @organization.organization_type %>
-Pan/Tin Number: <%= @organization.pan_tin_number %>
-Is a Store: <%= @organization.is_store %>
-Does sell eco friendly Products?: <%= @organization.is_eco_friendly %>
-Types of Products: <%= @organization.products_sold %>
-Can ship: <%= @organization.can_do_logistics %>
+
+
+<div class="row">
+
+    <ul>
+      <li>
+        Name: <strong><%= @organization.name %></strong>
+      </li>
+      <li>
+        Email: <strong> <%= @organization.email %></strong>
+      </li>
+      <li>
+        Mobile: <strong></strong> <%= @organization.mobile %>
+      </li>
+      <li>
+        Organization Type: <strong><%= @organization.organization_type %></strong>
+      </li>
+      <li>
+        Pan/Tin Number: <strong> <%= @organization.pan_tin_number %></strong>
+      </li>
+      <li>
+        Is a Store: <strong><%= @organization.is_store %></strong>
+      </li>
+      <li>
+        Does sell eco friendly Products?: <strong><%= @organization.is_eco_friendly %></strong>
+      </li>
+      <li>
+        Types of Products: <strong> <%= @organization.products_sold %></strong>
+      </li>
+      <li>
+        Can ship: <strong><%= @organization.can_do_logistics %></strong>
+      </li>
+    </ul>
+
+</div>
