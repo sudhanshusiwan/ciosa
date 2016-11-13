@@ -2,6 +2,10 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:edit, :update, :destroy]
   before_action :authenticate_user!, :access_to_seller_user, only: [:new, :create, :edit, :update, :destroy, :manage_my_products]
 
+  def home
+    @products = Product.order('id desc').approved.includes(:categories)
+  end
+  
   def index
     @products = Product.order('id desc').approved.includes(:categories)
   end

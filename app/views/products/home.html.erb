@@ -1,0 +1,59 @@
+<div class="parallax-container">
+  <div><%= image_tag('eco.jpg', style: 'width: 100%;margin-top: -10px') %></div>
+</div>
+<!--div class="section white">
+  <div class="row container">
+    <h2 class="header">Parallax</h2>
+    <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
+  </div>
+</div-->
+
+
+<!--<div class="parallax-container" style="height: 400px; width: auto;">-->
+<!--<div class="parallax">-->
+<!--<div style="position: absolute; right: 60px; top: 40px; ">-->
+<!--<h2>Jute Bags</h2>-->
+<!--<h5>I'm not using plastic bags!!</h5>-->
+<!--</div>-->
+<!--</div>-->
+<!--</div>-->
+
+<div class="row center" style="margin-top:15px;">
+  <div class="col s3"><a href=""><%= image_tag ("bags.jpg"), width: "250", height: "250"%><div class="row">Bag</div></a></div>
+  <div class="col s3"><a href=""><%= image_tag ("clothes.jpg"), width: "250", height: "250"  %><div class="row">Cloths</div></a></div>
+  <div class="col s3"><a href=""><%= image_tag ("accessories.jpg"), width: "250", height: "250", class: "circle"   %><div class="row">Accessories</div></a></div>
+  <div class="col s3"><a href=""><%= image_tag ("furniture.jpg"), width: "250", height: "250", class: "circle"  %><div class="row">Furniture</div></a></div>
+</div>
+
+
+<div class="row">
+  <% @products.each do |product| %>
+      <div class="col s3">
+        <div class="card">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="activator" src=<%= product.image.url %>>
+          </div>
+          <div class="card-content">
+            <span class="card-title activator grey-text text-darken-4"><%= product.name %><i class="material-icons right">more_vert</i></span>
+            <% if product.creator_id == current_user.try(:id) %>
+                <p><%= link_to 'Edit', edit_product_path(id: product.id) %> |  <%= link_to 'Delete', product_path(id: product.id), method: :destroy %></p>
+            <% end %>
+
+            <%= link_to 'Add to Cart', cart_products_path(pid: product.id), method: :post %>
+          </div>
+          <div class="card-reveal">
+            <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+            <p><%= product.price %> <%= product.categories.map(&:name).join %></p>
+          </div>
+        </div>
+      </div>
+
+  <% end %>
+</div>
+
+
+<script>
+    $(document).ready(function(){
+        $('.parallax').parallax();
+    });
+</script>

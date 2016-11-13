@@ -3,11 +3,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'users/registrations' }
   ActiveAdmin.routes(self)
 
-  root 'products#index'
+  root 'products#home'
 
   resources :products do
     collection do
-      get :search, :manage_my_products
+      get :search, :manage_my_products, :home
     end
   end
 

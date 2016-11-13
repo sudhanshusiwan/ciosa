@@ -298,6 +298,7 @@ DEPENDENCIES
   jazz_hands!
   jbuilder (~> 2.0)
   jquery-rails
+  mail
   materialize-sass
   paperclip
   pg
