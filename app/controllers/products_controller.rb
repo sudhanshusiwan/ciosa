@@ -15,12 +15,20 @@ class ProductsController < ApplicationController
   end
 
   def search
-    if params[:q].blank?
+    products = []
+
+    if params[:q].blank? && params[:category].blank?
       redirect_to products_path and return
     end
 
-    products = Product.approved.where('LOWER(name) like ?', "%#{params[:q].downcase}%")
-    products += Category.where('LOWER(name) like ?', "%#{params[:q].downcase}%").includes(:products).flat_map(:products)
+    if params[:q].present?
+      products += Product.approved.where('LOWER(name) like ?', "%#{params[:q].downcase}%")
+      products += Category.find_products(params[:q]) if params[:category].blank?
+    end
+
+    if params[:category].present?
+      products += Category.find_products(params[:category])
+    end
 
     @products = products.uniq
 
