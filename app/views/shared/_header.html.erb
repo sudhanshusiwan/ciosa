@@ -1,3 +1,9 @@
+<style>
+    /* label underline focus color */
+    .input-field label {
+        color: #000;
+    }
+</style>
 <ul id="dropdown1" class="dropdown-content">
   <li><a href="#!">one</a></li>
   <li><a href="#!">two</a></li>
@@ -8,6 +14,11 @@
   <div class="nav-wrapper">
     <a href="/" class="brand-logo"><%= image_tag ("logo.png") =%></a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li class="" style="left: -300px; position: relative;">
+        <%= form_tag(search_products_url, method: :get) do %>
+            <%= text_field_tag 'q', params[:q], placeholder: 'Search Products' %>
+        <% end %>
+      </li>
       <% if user_signed_in? %>
           <li>Hi, <strong><%= current_user.name %></strong>.</li>
           <li><%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %></li>
