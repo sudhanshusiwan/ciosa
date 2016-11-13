@@ -9,12 +9,6 @@
   <!--</div>-->
 <!--</div>-->
 
-<div class="row center" style="margin-top:15px;">
-	<div class="col s3"><a href="<%= search_products_path(q: 'bags')%>"><%= image_tag ("bags.jpg"), width: "250", height: "250"%><div class="row">Bags</div></a></div>
-	<div class="col s3"><a href="<%= search_products_path(q: 'clothes')%>"><%= image_tag ("clothes.jpg"), width: "250", height: "250"  %><div class="row">Clothes</div></a></div>
-	<div class="col s3"><a href="<%= search_products_path(q: 'accessories')%>"><%= image_tag ("accessories.jpg"), width: "250", height: "250", class: "circle"%><div class="row">Accessories</div></a></div>
-	<div class="col s3"><a href="<%= search_products_path(q: 'furniture')%>"><%= image_tag ("furniture.jpg"), width: "250", height: "250", class: "circle"%><div class="row">Furnitures</div></a></div>
-</div>
 
 
 <div class="row">
@@ -22,7 +16,7 @@
         <div class="col s3">
           <div class="card">
             <div class="card-image waves-effect waves-block waves-light">
-              <img class="activator" src=<%= product.image.url %>>
+              <img class="activator" src=<%= product.image.url %> style="height: 250px" />
             </div>
             <div class="card-content">
               <span class="card-title activator grey-text text-darken-4"><%= product.name %><i class="material-icons right">more_vert</i></span>
@@ -31,10 +25,6 @@
             <% end %>
 
               <%= link_to 'Add to Cart', cart_products_path(pid: product.id), method: :post %>
-            </div>
-            <div class="card-reveal">
-              <span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-              <p><%= product.price %> <%= product.categories.map(&:name).join %></p>
             </div>
           </div>
         </div>
