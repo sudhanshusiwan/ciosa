@@ -1,12 +1,12 @@
 <div class="parallax-container">
   <div class="parallax"><%= image_tag('Sliderfurn2.png', height: '300') %></div>
 </div>
-<div class="section white">
+<!--div class="section white">
   <div class="row container">
     <h2 class="header">Parallax</h2>
     <p class="grey-text text-darken-3 lighten-3">Parallax is an effect where the background content or image in this case, is moved at a different speed than the foreground content while scrolling.</p>
   </div>
-</div>
+</div-->
 
 
 <!--<div class="parallax-container" style="height: 400px; width: auto;">-->
@@ -17,6 +17,13 @@
     <!--</div>-->
   <!--</div>-->
 <!--</div>-->
+
+<div class="row center" style="margin-top:15px;">
+	<div class="col s3"><a href=""><%= image_tag ("bags.jpg"), width: "250", height: "250"%><div class="row">Bag</div></a></div>
+	<div class="col s3"><a href=""><%= image_tag ("clothes.jpg"), width: "250", height: "250"  %><div class="row">Cloths</div></a></div>
+	<div class="col s3"><a href=""><%= image_tag ("accessories.jpg"), width: "250", height: "250", class: "circle"   %><div class="row">Accessories</div></a></div>
+	<div class="col s3"><a href=""><%= image_tag ("furniture.jpg"), width: "250", height: "250", class: "circle"  %><div class="row">Furniture</div></a></div>
+</div>
 
 
 <div class="row">
@@ -43,6 +50,7 @@
 
     <% end %>
 </div>
+
 
 <script>
     $(document).ready(function(){
