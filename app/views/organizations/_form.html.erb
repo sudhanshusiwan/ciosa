@@ -5,49 +5,49 @@
     <% end %>
     <ul>
       <%= form_for @organization do |f| %>
-          <div class="input-field">
+          <div class="field">
             <%= f.label :name %>
             <%= f.text_field :name %>
           </div>
-          <div class="input-field">
+          <div class="field">
             <%= f.label :address %>
             <%= f.text_area :address %>
           </div>
-          <div class="input-field">
+          <div class="field">
             <%= f.label :organization_type %>
             <%= f.select :organization_type, options_for_select( 'NGO', 'Store' ) %>
           </div>
-          <div class="input-field">
+          <div class="field">
             <%= f.label :mobile %>
             <%= f.text_field :mobile %>
           </div>
-          <div class="input-field">
+          <div class="field">
             <%= f.label :email %>
             <%= f.text_field :email %>
           </div>
-          <div class="input-field">
+          <div class="field">
             <%= f.label :pan_tin_number %>
             <%= f.text_field :pan_tin_number %>
           </div>
-          <div class="input-field">
+          <div class="field">
             <%= f.label :is_store %>
             <%= f.check_box :is_store %>
           </div>
-          <div class="input-field">
+          <div class="field">
             <%= f.label :is_eco_friendly %>
             <%= f.check_box :is_eco_friendly %>
           </div>
-          <div class="input-field">
+          <div class="field">
             <%= f.label :products_sold %>
             <%= f.text_area :products_sold %>
           </div>
-          <div class="input-field">
+          <div class="field">
             <%= f.label :can_do_logistics %>
             <%= f.check_box :can_do_logistics %>
           </div>
 
           <div>
-            <%= f.submit %>
+             <%= f.submit 'Submit', class: 'btn beta-btn', id: 'submit-btn' %>
           </div>
       <% end %>
     </ul>
