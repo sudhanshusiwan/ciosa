@@ -64,6 +64,10 @@
 
     $('.quantityChanger').change(function () {
         var cid = $(this).attr('data-cid');
+        if(!cid) {
+            return true;
+        }
+
         $.ajax({
             url: '<%= update_quantity_cart_products_path %>',
             data: {quantity: this.value, id: cid},
