@@ -1,0 +1,24 @@
+<div class="row">
+	<div class="col s6"> <h6>Manage Your Products Here:</h6> </div>
+	<div class="col s6"> <h6><%= link_to 'Create New Product', new_product_path %></h6>  </div>
+</div>
+
+<table>
+	<th>Name</th>
+	<th>Available Quantity</th>
+	<th>Approval Status</th>
+	<th>View</th>
+	<th>Edit</th>
+	<th>Last Updated Date</th>
+
+	<% @products.each do |product| %>
+		<tr>
+			<td> <%= product.name %> </td>
+			<td> <%= product.available_quantity %> </td>
+			<td> <%= product.approved? ? 'Approved' : 'Not Approved' %> </td>
+			<td> <%= link_to 'View', product_path(product) %> </td>
+			<td> <%= link_to 'Edit', edit_product_path(product) %> </td>
+			<td> <%= product.updated_at.to_date %> </td>
+		</tr>
+	<% end %>
+</table>

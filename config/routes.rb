@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :products do
     collection do
-      get :search
+      get :search, :manage_my_products
     end
   end
 

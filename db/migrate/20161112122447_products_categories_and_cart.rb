@@ -1,8 +1,8 @@
 class ProductsCategoriesAndCart < ActiveRecord::Migration
   def change
-    create_table "products", :force => true do |t|
-      t.string   "name", null: false
-      t.text   "description", null: false
+    create_table  "products", :force => true do |t|
+      t.string    "name", null: false
+      t.text      "description", null: false
       t.integer   "price", null: false
       t.boolean   "is_approved"
       t.integer   "available_quantity", null: false
