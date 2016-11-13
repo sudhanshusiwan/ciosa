@@ -5,7 +5,7 @@
     }
 </style>
 <ul id="userInfo" class="dropdown-content">
-  <li><%= link_to 'Order History', edit_user_registration_path %></li>
+  <li><%= link_to 'Order History', orders_path %></li>
   <li><%= link_to 'Edit profile', edit_user_registration_path %></li>
   <li><%= link_to "Logout", destroy_user_session_path, method: :get, :class => 'navbar-link'  %></li>
 </ul>

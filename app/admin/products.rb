@@ -20,6 +20,8 @@ ActiveAdmin.register Product do
     actions
   end
 
+  form :partial => 'form'
+
   action_item( :approve, only: :show ) do
     if resource.declined? || resource.is_approved.nil?
       link_to 'Approve', approve_admin_product_path

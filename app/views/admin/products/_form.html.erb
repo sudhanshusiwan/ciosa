@@ -1,0 +1,13 @@
+<%= semantic_form_for [:admin, @product] do |form| %>
+    <%=form.inputs 'Product Details' do %>
+        <%= form.input :name, :label => 'Name' %>
+        <%= form.input :description %>
+        <%= form.input :price %>
+        <%= form.input :available_quantity %>
+        <%= form.input :is_approved %>
+        <%= form.input :is_eco_friendly %>
+        <%= form.input :old_attributes, :input_html => { :value => form.object.old_attributes }, as: :text %>
+    <% end %>
+
+    <%= form.actions %>
+<% end %>
