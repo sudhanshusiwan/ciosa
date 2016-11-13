@@ -17,7 +17,7 @@
           <div class="input-field col s12">
             <select name="organization[organization_type]">
               <option value="" class="disabled"></option>
-              <option value="propitiatory">Propitiatory</option>
+              <option value="proprietorship">Proprietorship</option>
               <option value="partnership">Partnership</option>
               <option value="pvt_ltd">Pvt Ltd</option>
             </select>
@@ -32,51 +32,39 @@
             <%= f.text_field :email %>
           </div>
           <div class="field">
-            <%= f.label :pan_tin_number %>
+            <%= f.label 'PAN / TIN number' %>
             <%= f.text_field :pan_tin_number %>
           </div>
           <div class="field">
             <label>Do you have a store?</label>
             <p>
-              <input name="is_store" type="radio" id="store_1" value="1"/>
+              <input name="organization[is_store]" type="radio" id="store_1" value="true"/>
               <label for="store_1">Yes</label>
             </p>
             <p>
-              <input name="is_store" type="radio" id="store_0" value="0" />
+              <input name="organization[is_store]" type="radio" id="store_0" value="false" />
               <label for="store_0">No</label>
             </p>
           </div>
           <div class="field">
             <label>Are you selling eco friendly products?</label>
             <p>
-              <input name="is_eco_friendly" type="radio" id="eco_1" value="1"/>
+              <input name="organization[is_eco_friendly]" type="radio" id="eco_1" value="true"/>
               <label for="eco_1">Yes</label>
             </p>
             <p>
-              <input name="is_eco_friendly" type="radio" id="eco_0" value="0" />
+              <input name="organization[is_eco_friendly]" type="radio" id="eco_0" value="false" />
               <label for="eco_0">No</label>
             </p>
           </div>
           <div class="field">
-            <label>Are you selling products?</label>
-            <p>
-              <input name="products_sold" type="radio" id="products_1" value="1"/>
-              <label for="products_1">Yes</label>
-            </p>
-            <p>
-              <input name="products_sold" type="radio" id="products_0" value="0" />
-              <label for="products_0">No</label>
-            </p>
-          </div>
-
-          <div class="field">
             <label>Can you take care of logistics?</label>
             <p>
-              <input name="can_do_logistics" type="radio" id="logistics_1" value="1"/>
+              <input name="organization[can_do_logistics]" type="radio" id="logistics_1" value="true"/>
               <label for="logistics_1">Yes</label>
             </p>
-            <p>
-              <input name="can_do_logistics" type="radio" id="logistics_0" value="0" />
+            <p> 
+              <input name="organization[can_do_logistics]" type="radio" id="logistics_0" value="false" />
               <label for="logistics_0">No</label>
             </p>
           </div>

@@ -5,7 +5,7 @@ class ProductsController < ApplicationController
   def home
     @products = Product.order('id desc').approved.includes(:categories)
   end
-  
+
   def index
     @products = Product.order('id desc').approved.includes(:categories)
   end
