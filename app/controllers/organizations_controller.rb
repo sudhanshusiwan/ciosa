@@ -10,7 +10,7 @@ class OrganizationsController < ApplicationController
 		@organization.creator_id = current_user.id
 		@organization.save!
 
-		flash[:notice] = 'Yay!! Organization created successfully!!'
+		flash[:success] = 'Yay!! Organization created successfully!!'
 		redirect_to organization_path(id: @organization.id) and return
 	rescue Exception => ex
 		render :new
@@ -31,7 +31,7 @@ class OrganizationsController < ApplicationController
 		@organization = Organization.find( params[:id] )
 		@organization.update_attributes!( organization_params )
 
-		flash[:notice] = 'Yay!! Organization updated successfully!!'
+		flash[:success] = 'Yay!! Organization updated successfully!!'
 		redirect_to organization_path(id: @organization.id) and return
 	rescue Exception => ex
 		render :new

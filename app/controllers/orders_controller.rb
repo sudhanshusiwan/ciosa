@@ -16,10 +16,10 @@ class OrdersController < ApplicationController
     order_id = Order.create_order_and_ordered_products(cart_product_ids, address_params, current_user)
 
     if order_id.nil?
-      flash[:notice] = 'Something went wrong, Please try again later'
+      flash[:success] = 'Something went wrong, Please try again later'
       redirect_to check_out_orders_path
     else
-      flash[:notice] = 'Order has been placed successfully'
+      flash[:success] = 'Order has been placed successfully'
       redirect_to order_path(id: order_id)
     end
   rescue Exception => ex
