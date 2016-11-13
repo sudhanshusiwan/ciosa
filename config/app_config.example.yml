@@ -1,0 +1,12 @@
+development: &appconfig
+  domain: lvh.me:3000
+  domain_without_port: lvh.me
+  port: 3000
+  scheme: http://
+  protocol: http
+
+production:
+  <<: *appconfig
+
+staging:
+  <<: *appconfig

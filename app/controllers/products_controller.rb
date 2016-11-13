@@ -24,6 +24,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.create!(product_params)
+    NotificationMailers.send_new_product_registration_notification( @product.id ).deliver_now
 
     redirect_to product_path(id: @product.id)
   rescue Exception => ex
@@ -44,7 +45,7 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product.update_attributes!(product_params)
+    @product.update_attributes!(product_params.except(:creator_id))
 
     redirect_to product_path(id: @product.id)
   rescue Exception => ex
@@ -67,7 +68,7 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    product_params = params.require(:product).permit(:name, :description, :price, :available_quantity, :image, categories: [])
+    product_params = params.require(:product).permit(:name, :description, :price, :available_quantity, :image, category_ids: [])
     product_params.merge!(creator_id: current_user.id)
   end
 end

@@ -10,6 +10,8 @@ class OrganizationsController < ApplicationController
 		@organization.creator_id = current_user.id
 		@organization.save!
 
+	    NotificationMailers.send_new_organization_registration_notification( @organization.id ).deliver_now
+
 		flash[:success] = 'Yay!! Organization created successfully!!'
 		redirect_to organization_path(id: @organization.id) and return
 	rescue Exception => ex

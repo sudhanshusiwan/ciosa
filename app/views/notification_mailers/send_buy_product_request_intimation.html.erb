@@ -1,0 +1,13 @@
+<div>
+  Dear Admin User,
+
+  New order has been placed in your site by <%= @buyer_user.name %>
+
+  <div>Name: <%= @product_hash[:name] %> </div>
+  <div>Price: <%= @product_hash[:price] %> </div>
+  <div>Ordered Quantity: <%= @product_hash[:quantity] %></div>
+
+  Product Creator Details:
+
+  <div> Product Creator - <%= @product_hash[:creator_name] %> </div>
+</div>
