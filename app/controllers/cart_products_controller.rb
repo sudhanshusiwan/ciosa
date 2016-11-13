@@ -10,7 +10,7 @@ class CartProductsController < ApplicationController
   def create
     cart_product = current_user.cart_products.detect{|cart_product| cart_product.product_id == @product.id}
     if cart_product.present?
-      response_hash =  @cart_product.update_product_quantity( params[:quantity] )
+      response_hash =  cart_product.update_product_quantity(cart_product.quantity + 1)
       if response_hash[:status]
         flash[:success] = 'Product already added to card and the quantity is updated'
       else
@@ -29,7 +29,7 @@ class CartProductsController < ApplicationController
     end
 
   rescue => ex
-    flash[:success] = "Error while creating cart #{ex.message}"
+    flash[:error] = "Error while creating cart #{ex.message}"
 
     if params[:q].present?
       redirect_to products_path(q: params[:q])

@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   end
 
   def create
-    cart_product_ids = params[:cart_product_ids]
+    cart_product_ids = params[:cart_product_ids].split
     address_params = { billing_address: params[:billing_address], delivery_address: params[:delivery_address] }
 
     order_id = Order.create_order_and_ordered_products(cart_product_ids, address_params, current_user)
