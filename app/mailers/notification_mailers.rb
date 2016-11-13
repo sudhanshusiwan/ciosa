@@ -1,5 +1,4 @@
 class NotificationMailers < ActionMailer::Base
-  layout 'mailer_layout'
 
   def send_new_product_registration_notification( product_id )
     @product = Product.where( id: product_id ).first

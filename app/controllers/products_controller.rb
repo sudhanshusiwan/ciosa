@@ -41,6 +41,9 @@ class ProductsController < ApplicationController
 
     redirect_to product_path(id: @product.id)
   rescue Exception => ex
+    puts ex
+    puts ex.backtrace
+
     flash[:error] = ex.message
     @product = Product.new(product_params)
 
@@ -58,8 +61,11 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product.update_attributes!(product_params.except(:creator_id))
+    product_attributes = product_params.merge( old_attributes: @product.slice('name', 'description', 'price', 'available_quantity', 'is_eco_friendly' ) )
+    product_attributes = product_attributes.merge( is_approved: false ).except(:creator_id)
+    @product.update_attributes!(product_attributes)
 
+    flash[:success] = 'Product will appear in index page, once its approved by admin'
     redirect_to product_path(id: @product.id)
   rescue Exception => ex
     flash[:error] = ex.message

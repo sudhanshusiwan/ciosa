@@ -9,6 +9,7 @@
           <%= f.input :available_quantity, class: 'txt-box' %>
           <%= f.input :categories, :as => :select, :label => 'Category', multiple: true, include_hidden: false,
                       :collection => Category.all.map { |category| [category.name, category.id] } %>
+          <%= f.input :is_eco_friendly, :as => :radio %>
           <%= f.input :image, id:'product-pic-input'%>
           <%= f.submit 'Create Product Request', class: 'btn beta-btn', id: 'submit-btn' %>
 
