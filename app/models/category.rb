@@ -7,6 +7,10 @@ class Category < ActiveRecord::Base
   validates :name, presence: true, uniqueness: true
 
   def self.find_products(name_string)
-  	Category.where('LOWER(name) like ?', "%#{name_string.downcase}%").includes(:products).flat_map(&:products)
+  	catagories = Category.where('LOWER(name) like ?', "%#{name_string.downcase}%").includes(:products)
+
+  	catagories.flat_map do |category|
+  		category.products.select { |product| product.approved? }
+  	end
   end
 end

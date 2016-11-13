@@ -19,10 +19,10 @@
 <!--</div>-->
 
 <div class="row center" style="margin-top:15px;">
-  <div class="col s3"><a href=""><%= image_tag ("bags.jpg"), width: "250", height: "250"%><div class="row">Bag</div></a></div>
-  <div class="col s3"><a href=""><%= image_tag ("clothes.jpg"), width: "250", height: "250"  %><div class="row">Cloths</div></a></div>
-  <div class="col s3"><a href=""><%= image_tag ("accessories.jpg"), width: "250", height: "250", class: "circle"   %><div class="row">Accessories</div></a></div>
-  <div class="col s3"><a href=""><%= image_tag ("furniture.jpg"), width: "250", height: "250", class: "circle"  %><div class="row">Furniture</div></a></div>
+  <div class="col s3"><a href="<%= search_products_path(category: 'bag') %>"><%= image_tag ("bags.jpg"), width: "250", height: "250"%><div class="row">Bag</div></a></div>
+  <div class="col s3"><a href="<%= search_products_path(category: 'clothes') %>"><%= image_tag ("clothes.jpg"), width: "250", height: "250"  %><div class="row">Cloths</div></a></div>
+  <div class="col s3"><a href="<%= search_products_path(category: 'accessories') %>"><%= image_tag ("accessories.jpg"), width: "250", height: "250", class: "circle"   %><div class="row">Accessories</div></a></div>
+  <div class="col s3"><a href="<%= search_products_path(category: 'furniture') %>"><%= image_tag ("furniture.jpg"), width: "250", height: "250", class: "circle"  %><div class="row">Furniture</div></a></div>
 </div>
 
 
